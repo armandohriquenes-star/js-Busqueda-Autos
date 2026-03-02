@@ -1,71 +1,287 @@
-body {
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    font-family: 'Staatliches', cursive;
-}
-html {
-    font-size: 62.5%;
-}
-h1 {
-    font-family: 'Staatliches', cursive;
-    font-size: 6rem;
-    padding: 3rem 0;
-    margin: 0;
-}
-.contenedor {
-    background-color: white;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-p {
-    font-size: 2rem;
-}
-h1, p {
-    text-align: center;
-}
-form {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem;
-    background: white;
-    margin-bottom: 10rem;
-    font-family: Arial, Helvetica, sans-serif;
-}
-#app p{
-    text-align: left!important;
-    font-size: 2rem;
-    font-family: Arial, Helvetica, sans-serif;
-}
-#resultado p {
-    margin: 0;
-    padding: 2rem;
-    border-bottom: 1px solid #e1e1e1;
-}
-#resultado p span {
-    font-weight: bold;
-}
-#resultado p:last-of-type{
-    border: none;
-}
-.alerta {
-    padding: 1rem;
-    text-align: center;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: white;
-    font-size: 2rem;
-}
-.error {
-    background-color: red;
+/* ============================================
+   ESTILOS PARA BUSCADOR DE AUTOS - VERSIÓN DINÁMICA
+   ============================================ */
+
+/* Fuente personalizada */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Variables de colores */
+:root {
+    --primary: #ff6b6b;
+    --secondary: #4ecdc4;
+    --dark: #2c3e50;
+    --light: #f7f7f7;
+    --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.sitio-web  {
-    color: white;
-    display: block;
-    font-size: 4rem;
-    max-width: 1200px;
-    margin: 2rem auto;
-    text-decoration: none;
+/* Reset base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.sitio-web:hover {
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gradient);
+    min-height: 100vh;
+    padding: 30px 20px;
+    line-height: 1.6;
+}
+
+/* Títulos con movimiento sutil */
+h1 {
+    text-align: center;
     color: white;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    letter-spacing: -0.5px;
+    animation: slideDown 0.8s ease-out;
+}
+
+/* Contenedor principal */
+.contenedor {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Formulario con efecto de tarjeta */
+#buscador {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+#buscador .row {
+    width: 100%;
+    margin: 0;
+}
+
+#buscador label {
+    display: block;
+    color: var(--dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+#buscador select {
+    width: 100%;
+    padding: 12px 15px;
+    background: white;
+    border: 2px solid #e1e1e1;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: var(--dark);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232c3e50'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+}
+
+#buscador select:hover {
+    border-color: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(78, 205, 196, 0.2);
+}
+
+#buscador select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+}
+
+/* Sección de resultados */
+h1+.contenedor h1 {
+    font-size: 2rem;
+    margin: 30px 0 20px;
+    color: var(--dark);
+}
+
+#resultado {
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 25px;
+    min-height: 300px;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Tarjetas de resultados */
+#resultado p {
+    background: white;
+    padding: 18px 22px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--primary);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    color: var(--dark);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    animation: slideInRight 0.4s ease-out;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#resultado p:hover {
+    transform: translateX(8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-left-color: var(--secondary);
+}
+
+/* Mensaje de "No hay resultados" */
+.alerta.error {
+    background: linear-gradient(135deg, #ff6b6b, #ee5253);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    animation: pulse 2s infinite;
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .contenedor {
+        padding: 20px;
+    }
+
+    #buscador {
+        grid-template-columns: 1fr;
+    }
+
+    #resultado p {
+        font-size: 0.95rem;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Pequeños detalles que lo hacen humano */
+#resultado p::before {
+    content: "🚗";
+    font-size: 1.3rem;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.1));
+}
+
+.alerta.error::before {
+    content: "😕";
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Efecto sutil en los selects al pasar */
+#buscador select option {
+    background: white;
+    color: var(--dark);
+    padding: 10px;
+}
+
+/* Hace que no se vea tan perfecto - asimetría controlada */
+.contenedor {
+    border-radius: 30px 30px 30px 30px;
+}
+
+#resultado p:nth-child(odd) {
+    border-left-width: 8px;
+}
+
+#resultado p:nth-child(even) {
+    border-left-width: 5px;
+    border-left-color: var(--secondary);
+}
+
+#resultado p:nth-child(3n) {
+    transform: rotate(0.3deg);
+}
+
+#resultado p:nth-child(3n):hover {
+    transform: rotate(0deg) translateX(8px);
 }
